@@ -140,7 +140,7 @@ export default function Home() {
             especialistas
           </div>
         </div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] p-8 gap-4 ">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] p-8 gap-4 ">
           {especialistas.map((especialista) => (
             <div
               key={especialista.id}
@@ -213,7 +213,7 @@ const VIDERE = () => {
           <g transform="matrix(5.4149 0 0 -5.4149 -23328 7200.3)">
             <path
               d="m4571.3 999.01h1.078c0.934 0 1.83 0.371 2.49 1.032 0.661 0.66 1.032 1.556 1.032 2.49v33.728h-4.6v-37.25z"
-              fill-rule="nonzero"
+              fillRule="nonzero"
             />
           </g>
           <g transform="matrix(5.4149 0 0 5.4149 -23328 -3820.5)">

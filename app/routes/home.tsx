@@ -2,8 +2,21 @@ import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "VIDERE - Excelência em Saúde" },
+    {
+      name: "description",
+      content: "Clínica Multiespecialidade em Sobral - Ceará",
+    },
+    {
+      name: "keywords",
+      content:
+        "VIDERE, clínica, multiespecialidade, Sobral, Ceará, consultas, saúde, atendimento médico, clínica em Sobral, " +
+        "Clínico Geral, Ginecologista, Cirurgia Minimamente Invasiva, Dermatologista, Estética Clínica, Dentista, Implantodontista, " +
+        "Fisioterapeuta, Acupunturista, Psicóloga, Psicólogo, ginecologia, consulta ginecológica, prevenção feminina, saúde da mulher, " +
+        "dermatologia, cuidados com a pele, estética facial, estética corporal, odontologia, implantes dentários, saúde bucal, " +
+        "fisioterapia, acupuntura, reabilitação, dor, psicologia, saúde emocional, terapia, bem-estar, autocuidado, agendamento, " +
+        "consultas médicas Sobral, especialistas Sobral, clínica sobral centro, RQE, CRM, CREMEC, CREFITO, CRP",
+    },
   ];
 }
 
@@ -12,10 +25,10 @@ type Especialista = {
   nome: string;
   especialidade: string;
   conselho?: string;
-  foto?: string;
+  foto: string;
 };
 
-const especialistas = [
+const especialistas: Especialista[] = [
   {
     id: "roque",
     nome: "Dr. Roque Linhares",
@@ -50,6 +63,13 @@ const especialistas = [
     foto: "especialistas/beatriz.png",
   },
   {
+    id: "talita",
+    nome: "Dra. Talita Ponte",
+    especialidade: "Clínica Geral",
+    conselho: "CRM-CE 27637",
+    foto: "especialistas/talita.png",
+  },
+  {
     id: "carloseduardo",
     nome: "Carlos Eduardo",
     especialidade: "Dentista e Implantodontista",
@@ -66,7 +86,7 @@ const especialistas = [
     id: "saravasconcelos",
     nome: "Sara Vasconcelos",
     especialidade: "Fisioterapeuta",
-    foto: "especialistas/videre.png",
+    foto: "especialistas/sara.png",
   },
   {
     id: "clararipardo",
@@ -104,50 +124,23 @@ const especialistas = [
   },
 ];
 
-// const especialistas: Especialista[] = [
-//   {
-//     id: "roque",
-//     nome: "Dr. Roque Linhares",
-//     especialidade: "Clínico Geral",
-//     foto: "especialistas/roque.png",
-//   },
-//   {
-//     id: "iara",
-//     nome: "Dra. Iara Tomaz",
-//     especialidade: "Ginecologista e Cirurgia Minimamente Invasiva",
-//     conselho: "CREMEC 20975 | RQE 16148 - 18129",
-//     foto: "especialistas/iara.png",
-//   },
-//   {
-//     id: "andyara",
-//     nome: "Dra. Andyara",
-//     especialidade: "Ginecologista",
-//     conselho: "CREMEC 21112 / RQE 17006",
-//     foto: "especialistas/andyara.png",
-//   },
-//   {
-//     id: "mario",
-//     nome: "Dr. Mário Timbó",
-//     especialidade: "Dermatologista",
-//     foto: "especialistas/mario.png",
-//   },
-// ];
-
 export default function Home() {
   return (
     <div className="bg-egeu-3 min-h-screen relative text-marmore-1">
       <div className="w-full h-full absolute z-0 overflow-hidden">
         <BACKGROUND />
       </div>
-      <div className="relative max-w-md mx-auto">
-        <div className="p-8 w-72 mx-auto">
+      <div className="relative max-w-3xl mx-auto">
+        <div className="p-8 w-96 mx-auto">
           <VIDERE />
         </div>
-        <div className="text-center font-medium tracking-tighter text-2xl">
-          Agende uma consulta ou procedimento <br /> com um dos nossos
-          especialistas
+        <div className="px-8">
+          <div className="text-center leading-tight font-medium tracking-tighter text-xl border p-4">
+            Agende uma consulta ou procedimento <br /> com um dos nossos
+            especialistas
+          </div>
         </div>
-        <div className="grid grid-cols-2 p-8 gap-4 ">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] p-8 gap-4 ">
           {especialistas.map((especialista) => (
             <div
               key={especialista.id}
@@ -156,13 +149,13 @@ export default function Home() {
               <div className="rounded-br-3xl relative overflow-hidden">
                 <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl"></div>
                 <img
-                  src={especialista.foto || "especialistas/videre.png"}
+                  src={especialista.foto}
                   alt={especialista.nome}
                   className="w-full relative"
                 />
               </div>
 
-              <div className="text-xl font-medium tracking-tight">
+              <div className="text-xl leading-none font-medium tracking-tighter">
                 {especialista.nome}
               </div>
               <div className="text-sm leading-tight">
@@ -175,6 +168,21 @@ export default function Home() {
               )}
             </div>
           ))}
+        </div>
+        <div className="p-8 text-sm">
+          <h1 className="font-bold">
+            A VIDERE é uma clínica multiespecialidades em Sobral que escolheu
+            cuidar de um jeito diferente.
+          </h1>
+          <p>
+            Nossas especialidades: Ginecologia e Cirurgia Minimamente Invasiva •
+            Dermatologia • Clínica Geral • Odontologia e Implantodontia •
+            Fisioterapia e Acupuntura • Psicologia.
+          </p>
+          <p>
+            Na VIDERE, você não é apenas um caso clínico. Sua história e sua
+            individualidade fazem parte do tratamento.
+          </p>
         </div>
       </div>
     </div>
@@ -233,7 +241,7 @@ const VIDERE = () => {
 const BACKGROUND = () => {
   return (
     <div className="grid grid-cols-6">
-      {Array(90)
+      {Array(120)
         .fill(0)
         .map((_, i) => (
           <div key={i} className="border opacity-5 aspect-square"></div>

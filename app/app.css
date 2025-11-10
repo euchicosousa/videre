@@ -16,3 +16,8 @@ html,
 body {
   @apply antialiased;
 }
+
+p,
+h1 {
+  @apply mb-2;
+}

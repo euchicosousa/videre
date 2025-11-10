@@ -1,4 +1,7 @@
+import { LocationEditIcon, MapIcon, PhoneIcon } from "lucide-react";
 import type { Route } from "./+types/home";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -26,6 +29,7 @@ type Especialista = {
   especialidade: string;
   conselho?: string;
   foto: string;
+  artigo: string;
 };
 
 const especialistas: Especialista[] = [
@@ -34,6 +38,7 @@ const especialistas: Especialista[] = [
     nome: "Dr. Roque Linhares",
     especialidade: "Clínico Geral",
     foto: "especialistas/roque.png",
+    artigo: "o",
   },
   {
     id: "iara",
@@ -41,6 +46,7 @@ const especialistas: Especialista[] = [
     especialidade: "Ginecologista e Cirurgia Minimamente Invasiva",
     conselho: "CREMEC 20975 / RQE 16148 - 18129",
     foto: "especialistas/iara.png",
+    artigo: "a",
   },
   {
     id: "andyara",
@@ -48,12 +54,14 @@ const especialistas: Especialista[] = [
     especialidade: "Ginecologista",
     conselho: "CREMEC 21112 / RQE 17006",
     foto: "especialistas/andyara.png",
+    artigo: "a",
   },
   {
     id: "mario",
     nome: "Dr. Mário Timbó",
     especialidade: "Dermatologista",
     foto: "especialistas/mario.png",
+    artigo: "o",
   },
   {
     id: "beatriz",
@@ -61,6 +69,7 @@ const especialistas: Especialista[] = [
     especialidade: "Estética Clínica",
     conselho: "CRM-CE 24490",
     foto: "especialistas/beatriz.png",
+    artigo: "a",
   },
   {
     id: "talita",
@@ -68,12 +77,14 @@ const especialistas: Especialista[] = [
     especialidade: "Clínica Geral",
     conselho: "CRM-CE 27637",
     foto: "especialistas/talita.png",
+    artigo: "a",
   },
   {
     id: "carloseduardo",
     nome: "Carlos Eduardo",
     especialidade: "Dentista e Implantodontista",
     foto: "especialistas/carloseduardo.png",
+    artigo: "o",
   },
   {
     id: "suelena",
@@ -81,12 +92,14 @@ const especialistas: Especialista[] = [
     especialidade: "Fisioterapeuta e Acupunturista",
     conselho: "CREFITO 212484-F",
     foto: "especialistas/suelena.png",
+    artigo: "a",
   },
   {
     id: "saravasconcelos",
     nome: "Sara Vasconcelos",
     especialidade: "Fisioterapeuta",
     foto: "especialistas/sara.png",
+    artigo: "a",
   },
   {
     id: "clararipardo",
@@ -94,12 +107,14 @@ const especialistas: Especialista[] = [
     especialidade: "Fisioterapeuta",
     conselho: "CREFITO 298410-F",
     foto: "especialistas/videre.png",
+    artigo: "a",
   },
   {
     id: "celialinhares",
     nome: "Célia Linhares",
     especialidade: "Fisioterapeuta",
     foto: "especialistas/videre.png",
+    artigo: "a",
   },
   {
     id: "andersonmota",
@@ -107,6 +122,7 @@ const especialistas: Especialista[] = [
     especialidade: "Psicólogo",
     conselho: "CRP 11/09704",
     foto: "especialistas/anderson.png",
+    artigo: "o",
   },
   {
     id: "joseairton",
@@ -114,6 +130,7 @@ const especialistas: Especialista[] = [
     especialidade: "Psicólogo",
     conselho: "CRP 11/10803",
     foto: "especialistas/airton.png",
+    artigo: "o",
   },
   {
     id: "amandamedeiros",
@@ -121,15 +138,28 @@ const especialistas: Especialista[] = [
     especialidade: "Psicóloga",
     conselho: "CRP 11/18491",
     foto: "especialistas/videre.png",
+    artigo: "a",
   },
+];
+
+const cta = [
+  `Olá, gostaria de conversar sobre o atendimento com __artigo__ __especialista__. Podem me orientar nos próximos passos?`,
+  `Oi, queria entender como funciona o agendamento com __artigo__ __especialista__. Podem me ajudar?`,
+  `Olá, estou buscando atendimento com __artigo__ __especialista__. Me contam como iniciar o processo?`,
+  `Oi, podem me orientar sobre disponibilidade de agenda com __artigo__ __especialista__?`,
+  `Olá, gostaria de marcar uma consulta com __artigo__ __especialista__. Qual o melhor caminho por aqui?`,
+  `Oi, podem me ajudar a encontrar um bom horário para consultar com __artigo__ __especialista__?`,
+  "Olá, queria conversar sobre atendimento com __artigo__ __especialista__. Como funciona o agendamento?",
+  "Oi, estou em busca de uma consulta com __artigo__ __especialista__. Podem me guiar no processo?",
+  "Olá, gostaria de saber mais sobre como agendar com __artigo__ __especialista__. Me ajudam com os próximos passos?",
+  "Oi, podem me orientar com calma sobre a agenda do(a) __artigo__ __especialista__? Quero agendar uma consulta.",
 ];
 
 export default function Home() {
   return (
     <div className="bg-egeu-3 min-h-screen relative text-marmore-1">
-      <div className="w-full h-full absolute z-0 overflow-hidden">
-        <BACKGROUND />
-      </div>
+      <BACKGROUND />
+
       <div className="relative max-w-3xl mx-auto">
         <div className="p-8 w-96 mx-auto">
           <VIDERE />
@@ -142,7 +172,10 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] p-8 gap-4 ">
           {especialistas.map((especialista) => (
-            <div
+            <Link
+              to={`/whatsapp?text=${cta[Math.floor(Math.random() * cta.length)]
+                .replace("__artigo__", especialista.artigo)
+                .replace("__especialista__", especialista.nome)}`}
               key={especialista.id}
               className="flex text-center flex-col gap-2"
             >
@@ -166,9 +199,28 @@ export default function Home() {
                   {especialista.conselho}
                 </div>
               )}
-            </div>
+            </Link>
           ))}
         </div>
+
+        <div className="px-8 flex gap-2 flex-col">
+          <div className="font-bold text-xl flex gap-2 items-center">
+            <FaWhatsapp className="size-6" /> 3613-4001
+          </div>
+          <div className="flex gap-2 font-bold items-center">
+            <FaInstagram className="size-6" />
+            @videresaude
+          </div>
+          <div className="flex gap-2">
+            <MapIcon />
+            <div className="leading-tight">
+              <div>Rua Dr. Figueiredo Rodrigues, 573</div>
+              <div>Centro, Sobral - CE</div>
+            </div>
+          </div>
+        </div>
+        <div className="border-b pb-8 mx-8"></div>
+
         <div className="p-8 text-sm">
           <h1 className="font-bold">
             A VIDERE é uma clínica multiespecialidades em Sobral que escolheu
@@ -189,7 +241,7 @@ export default function Home() {
   );
 }
 
-const VIDERE = () => {
+export const VIDERE = () => {
   return (
     <svg
       clipRule="evenodd"
@@ -238,14 +290,16 @@ const VIDERE = () => {
   );
 };
 
-const BACKGROUND = () => {
+export const BACKGROUND = () => {
   return (
-    <div className="grid grid-cols-6">
-      {Array(120)
-        .fill(0)
-        .map((_, i) => (
-          <div key={i} className="border opacity-5 aspect-square"></div>
-        ))}
+    <div className="w-full h-full absolute z-0 overflow-hidden">
+      <div className="grid grid-cols-6">
+        {Array(120)
+          .fill(0)
+          .map((_, i) => (
+            <div key={i} className="border opacity-5 aspect-square"></div>
+          ))}
+      </div>
     </div>
   );
 };

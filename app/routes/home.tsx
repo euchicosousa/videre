@@ -186,12 +186,12 @@ export default function Home() {
               key={especialista.id}
               className="flex text-center flex-col gap-2 group"
             >
-              <div className="rounded-br-3xl relative overflow-hidden pt-8">
-                <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl"></div>
+              <div className="rounded-br-3xl relative overflow-hidden">
+                <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
                 <img
                   src={especialista.foto}
                   alt={especialista.nome}
-                  className="w-full relative group-hover:scale-110 transition-transform duration-500"
+                  className="w-full relative"
                 />
               </div>
 

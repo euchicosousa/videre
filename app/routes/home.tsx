@@ -1,7 +1,8 @@
-import { LocationEditIcon, MapIcon, PhoneIcon } from "lucide-react";
-import type { Route } from "./+types/home";
+import { MapIcon } from "lucide-react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,125 +24,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-type Especialista = {
-  id: string;
-  nome: string;
-  especialidade: string;
-  conselho?: string;
-  foto: string;
-  artigo: string;
-};
-
-const especialistas: Especialista[] = [
-  {
-    id: "roque",
-    nome: "Dr. Roque Linhares",
-    especialidade: "Clínico Geral",
-    foto: "especialistas/roque.png",
-    artigo: "o",
-  },
-  {
-    id: "iara",
-    nome: "Dra. Iara Tomaz",
-    especialidade: "Ginecologista e Cirurgia Minimamente Invasiva",
-    conselho: "CREMEC 20975 / RQE 16148 - 18129",
-    foto: "especialistas/iara.png",
-    artigo: "a",
-  },
-  {
-    id: "andyara",
-    nome: "Dra. Andyara",
-    especialidade: "Ginecologista",
-    conselho: "CREMEC 21112 / RQE 17006",
-    foto: "especialistas/andyara.png",
-    artigo: "a",
-  },
-  {
-    id: "mario",
-    nome: "Dr. Mário Timbó",
-    especialidade: "Dermatologista",
-    foto: "especialistas/mario.png",
-    artigo: "o",
-  },
-  {
-    id: "beatriz",
-    nome: "Dra. Ana Beatriz",
-    especialidade: "Estética Clínica",
-    conselho: "CRM-CE 24490",
-    foto: "especialistas/beatriz.png",
-    artigo: "a",
-  },
-  {
-    id: "talita",
-    nome: "Dra. Talita Ponte",
-    especialidade: "Clínica Geral",
-    conselho: "CRM-CE 27637",
-    foto: "especialistas/talita.png",
-    artigo: "a",
-  },
-  {
-    id: "carloseduardo",
-    nome: "Carlos Eduardo",
-    especialidade: "Dentista e Implantodontista",
-    foto: "especialistas/carloseduardo.png",
-    artigo: "o",
-  },
-  {
-    id: "suelena",
-    nome: "Suelena Ponte",
-    especialidade: "Fisioterapeuta e Acupunturista",
-    conselho: "CREFITO 212484-F",
-    foto: "especialistas/suelena.png",
-    artigo: "a",
-  },
-  {
-    id: "saravasconcelos",
-    nome: "Sara Vasconcelos",
-    especialidade: "Fisioterapeuta",
-    foto: "especialistas/sara.png",
-    artigo: "a",
-  },
-  {
-    id: "clararipardo",
-    nome: "Clara Ripardo",
-    especialidade: "Fisioterapeuta",
-    conselho: "CREFITO 298410-F",
-    foto: "especialistas/videre.png",
-    artigo: "a",
-  },
-  {
-    id: "celialinhares",
-    nome: "Célia Linhares",
-    especialidade: "Fisioterapeuta",
-    foto: "especialistas/videre.png",
-    artigo: "a",
-  },
-  {
-    id: "andersonmota",
-    nome: "Anderson Mota",
-    especialidade: "Psicólogo",
-    conselho: "CRP 11/09704",
-    foto: "especialistas/anderson.png",
-    artigo: "o",
-  },
-  {
-    id: "joseairton",
-    nome: "José Airton",
-    especialidade: "Psicólogo",
-    conselho: "CRP 11/10803",
-    foto: "especialistas/airton.png",
-    artigo: "o",
-  },
-  {
-    id: "amandamedeiros",
-    nome: "Amanda Medeiros",
-    especialidade: "Psicóloga",
-    conselho: "CRP 11/18491",
-    foto: "especialistas/videre.png",
-    artigo: "a",
-  },
-];
-
 const cta = [
   `Olá, gostaria de conversar sobre o atendimento com __artigo__ __especialista__. Podem me orientar nos próximos passos?`,
   `Oi, queria entender como funciona o agendamento com __artigo__ __especialista__. Podem me ajudar?`,
@@ -152,10 +34,135 @@ const cta = [
   "Olá, queria conversar sobre atendimento com __artigo__ __especialista__. Como funciona o agendamento?",
   "Oi, estou em busca de uma consulta com __artigo__ __especialista__. Podem me guiar no processo?",
   "Olá, gostaria de saber mais sobre como agendar com __artigo__ __especialista__. Me ajudam com os próximos passos?",
-  "Oi, podem me orientar com calma sobre a agenda do(a) __artigo__ __especialista__? Quero agendar uma consulta.",
+  "Oi, podem me orientar com calma sobre a agenda d__artigo__ __especialista__? Quero agendar uma consulta.",
 ];
 
+export const loader = async () => {
+  const especialistas = [
+    {
+      id: "roque",
+      nome: "Dr. Roque Linhares",
+      especialidade: "Clínico Geral",
+      foto: "especialistas/roque.png",
+      artigo: "o",
+    },
+    {
+      id: "iara",
+      nome: "Dra. Iara Tomaz",
+      especialidade: "Ginecologista e Cirurgia Minimamente Invasiva",
+      conselho: "CREMEC 20975 / RQE 16148 - 18129",
+      foto: "especialistas/iara.png",
+      artigo: "a",
+    },
+    {
+      id: "andyara",
+      nome: "Dra. Andyara",
+      especialidade: "Ginecologista",
+      conselho: "CREMEC 21112 / RQE 17006",
+      foto: "especialistas/andyara.png",
+      artigo: "a",
+    },
+    {
+      id: "mario",
+      nome: "Dr. Mário Timbó",
+      especialidade: "Dermatologista",
+      foto: "especialistas/mario.png",
+      artigo: "o",
+    },
+    {
+      id: "beatriz",
+      nome: "Dra. Ana Beatriz",
+      especialidade: "Estética Clínica",
+      conselho: "CRM-CE 24490",
+      foto: "especialistas/beatriz.png",
+      artigo: "a",
+    },
+    {
+      id: "talita",
+      nome: "Dra. Talita Ponte",
+      especialidade: "Clínica Geral",
+      conselho: "CRM-CE 27637",
+      foto: "especialistas/talita.png",
+      artigo: "a",
+    },
+    {
+      id: "carloseduardo",
+      nome: "Carlos Eduardo",
+      especialidade: "Dentista e Implantodontista",
+      foto: "especialistas/carloseduardo.png",
+      artigo: "o",
+    },
+    {
+      id: "suelena",
+      nome: "Suelena Ponte",
+      especialidade: "Fisioterapeuta e Acupunturista",
+      conselho: "CREFITO 212484-F",
+      foto: "especialistas/suelena.png",
+      artigo: "a",
+    },
+    {
+      id: "saravasconcelos",
+      nome: "Sara Vasconcelos",
+      especialidade: "Fisioterapeuta",
+      foto: "especialistas/sara.png",
+      artigo: "a",
+    },
+    {
+      id: "clararipardo",
+      nome: "Clara Ripardo",
+      especialidade: "Fisioterapeuta",
+      conselho: "CREFITO 298410-F",
+      foto: "especialistas/videre.png",
+      artigo: "a",
+    },
+    {
+      id: "celialinhares",
+      nome: "Célia Linhares",
+      especialidade: "Fisioterapeuta",
+      foto: "especialistas/videre.png",
+      artigo: "a",
+    },
+    {
+      id: "andersonmota",
+      nome: "Anderson Mota",
+      especialidade: "Psicólogo",
+      conselho: "CRP 11/09704",
+      foto: "especialistas/anderson.png",
+      artigo: "o",
+    },
+    {
+      id: "joseairton",
+      nome: "José Airton",
+      especialidade: "Psicólogo",
+      conselho: "CRP 11/10803",
+      foto: "especialistas/airton.png",
+      artigo: "o",
+    },
+    {
+      id: "amandamedeiros",
+      nome: "Amanda Medeiros",
+      especialidade: "Psicóloga",
+      conselho: "CRP 11/18491",
+      foto: "especialistas/videre.png",
+      artigo: "a",
+    },
+  ];
+
+  return {
+    especialistas: especialistas.map((especialista) => ({
+      id: especialista.id,
+      nome: especialista.nome,
+      especialidade: especialista.especialidade,
+      conselho: especialista.conselho,
+      foto: especialista.foto,
+      artigo: especialista.artigo,
+      seed: Math.floor(Math.random() * cta.length),
+    })),
+  };
+};
+
 export default function Home() {
+  const { especialistas } = useLoaderData<typeof loader>();
   return (
     <div className="bg-egeu-3 min-h-screen relative text-marmore-1">
       <BACKGROUND />
@@ -173,18 +180,18 @@ export default function Home() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] p-8 gap-4 ">
           {especialistas.map((especialista) => (
             <Link
-              to={`/whatsapp?text=${cta[Math.floor(Math.random() * cta.length)]
+              to={`/whatsapp?text=${cta[especialista.seed]
                 .replace("__artigo__", especialista.artigo)
                 .replace("__especialista__", especialista.nome)}`}
               key={especialista.id}
-              className="flex text-center flex-col gap-2"
+              className="flex text-center flex-col gap-2 group"
             >
-              <div className="rounded-br-3xl relative overflow-hidden">
+              <div className="rounded-br-3xl relative overflow-hidden pt-8">
                 <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl"></div>
                 <img
                   src={especialista.foto}
                   alt={especialista.nome}
-                  className="w-full relative"
+                  className="w-full relative group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
 
@@ -291,15 +298,40 @@ export const VIDERE = () => {
 };
 
 export const BACKGROUND = () => {
+  const { cols, totalSquares } = useGrid(60);
+
+  console.log(totalSquares);
+
+  const items = Array(totalSquares).fill(0);
+
   return (
-    <div className="w-full h-full absolute z-0 overflow-hidden">
-      <div className="grid grid-cols-6">
-        {Array(120)
-          .fill(0)
-          .map((_, i) => (
-            <div key={i} className="border opacity-5 aspect-square"></div>
-          ))}
+    <div className="w-full h-full opacity-10 absolute z-0 overflow-hidden">
+      <div
+        className="grid"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      >
+        {items.map((_, i) => (
+          <div
+            key={i}
+            className="border-t border-r aspect-square grid place-content-center"
+          ></div>
+        ))}
       </div>
     </div>
   );
 };
+
+function useGrid(squareSize: number) {
+  const [grid, setGrid] = useState({ cols: 0, rows: 0, totalSquares: 0 });
+
+  useEffect(() => {
+    const width = document.documentElement.offsetWidth;
+    const height = document.documentElement.offsetHeight;
+    const cols = Math.floor(width / squareSize);
+    const rows = Math.floor(height / squareSize);
+    const totalSquares = cols * rows;
+    setGrid({ cols, rows, totalSquares });
+  }, [squareSize]);
+
+  return grid;
+}

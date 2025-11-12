@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
 import type { Route } from "./+types/home";
+import { motion } from "motion/react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -168,45 +169,71 @@ export default function Home() {
       <BACKGROUND />
 
       <div className="relative max-w-3xl mx-auto">
-        <div className="p-8 w-96 mx-auto">
+        <motion.div
+          className="p-8 w-96 mx-auto"
+          initial={{ opacity: 0, y: "-50px" }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 1, ease: "easeOut" },
+          }}
+        >
           <VIDERE />
-        </div>
-        <div className="px-8">
+        </motion.div>
+        <motion.div
+          className="px-8"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 1, ease: "easeOut", delay: 1 },
+          }}
+        >
           <div className="text-center leading-tight font-medium tracking-tighter text-xl border p-4">
             Agende uma consulta ou procedimento <br /> com um dos nossos
             especialistas
           </div>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] p-8 gap-4 ">
-          {especialistas.map((especialista) => (
-            <Link
-              to={`/whatsapp?text=${cta[especialista.seed]
-                .replace("__artigo__", especialista.artigo)
-                .replace("__especialista__", especialista.nome)}`}
+          {especialistas.map((especialista, i) => (
+            <motion.div
+              className=""
               key={especialista.id}
-              className="flex text-center flex-col gap-2 group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: 1, ease: "easeOut", delay: 0.2 * i },
+              }}
             >
-              <div className="rounded-br-3xl relative overflow-hidden">
-                <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
-                <img
-                  src={especialista.foto}
-                  alt={especialista.nome}
-                  className="w-full relative"
-                />
-              </div>
-
-              <div className="text-xl leading-none font-medium tracking-tighter">
-                {especialista.nome}
-              </div>
-              <div className="text-sm leading-tight">
-                {especialista.especialidade}
-              </div>
-              {especialista.conselho && (
-                <div className="uppercase text-[10px] tracking-wider">
-                  {especialista.conselho}
+              <Link
+                to={`/whatsapp?text=${cta[especialista.seed]
+                  .replace("__artigo__", especialista.artigo)
+                  .replace("__especialista__", especialista.nome)}`}
+                className="flex text-center flex-col gap-2 group"
+              >
+                <div className="rounded-br-3xl relative overflow-hidden">
+                  <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
+                  <img
+                    src={especialista.foto}
+                    alt={especialista.nome}
+                    className="w-full relative"
+                  />
                 </div>
-              )}
-            </Link>
+
+                <div className="text-xl leading-none font-medium tracking-tighter">
+                  {especialista.nome}
+                </div>
+                <div className="text-sm leading-tight">
+                  {especialista.especialidade}
+                </div>
+                {especialista.conselho && (
+                  <div className="uppercase text-[10px] tracking-wider">
+                    {especialista.conselho}
+                  </div>
+                )}
+              </Link>
+            </motion.div>
           ))}
         </div>
 

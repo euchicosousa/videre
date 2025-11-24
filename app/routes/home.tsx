@@ -333,14 +333,14 @@ export const VIDERE = () => {
 };
 
 export const BACKGROUND = () => {
-  const { cols, totalSquares } = useGrid(60);
+  const { cols, totalSquares } = useGrid(70);
 
   console.log(totalSquares);
 
   const items = Array(totalSquares).fill(0);
 
   return (
-    <div className="w-full h-full opacity-10 absolute z-0 overflow-hidden">
+    <div className="w-full min-h-full opacity-10 absolute z-0 overflow-hidden">
       <div
         className="grid"
         style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}

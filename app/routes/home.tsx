@@ -44,7 +44,7 @@ export const loader = async () => {
       id: "roque",
       nome: "Dr. Roque Linhares",
       especialidade: "Clínico Geral",
-      foto: "especialistas/roque.png",
+      foto: "especialistas/roque.webp",
       artigo: "o",
     },
     {
@@ -52,7 +52,7 @@ export const loader = async () => {
       nome: "Dra. Iara Tomaz",
       especialidade: "Ginecologista e Cirurgia Minimamente Invasiva",
       conselho: "CREMEC 20975 / RQE 16148 - 18129",
-      foto: "especialistas/iara.png",
+      foto: "especialistas/iara.webp",
       artigo: "a",
     },
     {
@@ -60,14 +60,14 @@ export const loader = async () => {
       nome: "Dra. Andyara",
       especialidade: "Ginecologista",
       conselho: "CREMEC 21112 / RQE 17006",
-      foto: "especialistas/andyara.png",
+      foto: "especialistas/andyara.webp",
       artigo: "a",
     },
     {
       id: "mario",
       nome: "Dr. Mário Timbó",
       especialidade: "Dermatologista",
-      foto: "especialistas/mario.png",
+      foto: "especialistas/mario.webp",
       artigo: "o",
     },
     {
@@ -75,7 +75,7 @@ export const loader = async () => {
       nome: "Dra. Ana Beatriz",
       especialidade: "Estética Clínica",
       conselho: "CRM-CE 24490",
-      foto: "especialistas/beatriz.png",
+      foto: "especialistas/beatriz.webp",
       artigo: "a",
     },
     {
@@ -83,14 +83,14 @@ export const loader = async () => {
       nome: "Dra. Talita Ponte",
       especialidade: "Clínica Geral",
       conselho: "CRM-CE 27637",
-      foto: "especialistas/talita.png",
+      foto: "especialistas/talita.webp",
       artigo: "a",
     },
     {
       id: "carloseduardo",
       nome: "Carlos Eduardo",
       especialidade: "Dentista e Implantodontista",
-      foto: "especialistas/carloseduardo.png",
+      foto: "especialistas/carloseduardo.webp",
       artigo: "o",
     },
     {
@@ -98,14 +98,14 @@ export const loader = async () => {
       nome: "Suelena Ponte",
       especialidade: "Fisioterapeuta e Acupunturista",
       conselho: "CREFITO 212484-F",
-      foto: "especialistas/suelena.png",
+      foto: "especialistas/suelena.webp",
       artigo: "a",
     },
     {
       id: "saravasconcelos",
       nome: "Sara Vasconcelos",
       especialidade: "Fisioterapeuta",
-      foto: "especialistas/sara.png",
+      foto: "especialistas/sara.webp",
       artigo: "a",
     },
     {
@@ -113,14 +113,22 @@ export const loader = async () => {
       nome: "Clara Ripardo",
       especialidade: "Fisioterapeuta",
       conselho: "CREFITO 298410-F",
-      foto: "especialistas/videre.png",
+      foto: "especialistas/videre.webp",
       artigo: "a",
     },
     {
       id: "celialinhares",
       nome: "Célia Linhares",
       especialidade: "Fisioterapeuta",
-      foto: "especialistas/videre.png",
+      foto: "especialistas/videre.webp",
+      artigo: "a",
+    },
+    {
+      id: "deysebraga",
+      nome: "Deyse Braga",
+      especialidade: "Nutricionista",
+      conselho: "CRN 11-3486",
+      foto: "especialistas/deyse.webp",
       artigo: "a",
     },
     {
@@ -128,7 +136,7 @@ export const loader = async () => {
       nome: "Anderson Mota",
       especialidade: "Psicólogo",
       conselho: "CRP 11/09704",
-      foto: "especialistas/anderson.png",
+      foto: "especialistas/anderson.webp",
       artigo: "o",
     },
     {
@@ -136,17 +144,17 @@ export const loader = async () => {
       nome: "José Airton",
       especialidade: "Psicólogo",
       conselho: "CRP 11/10803",
-      foto: "especialistas/airton.png",
+      foto: "especialistas/airton.webp",
       artigo: "o",
     },
-    {
-      id: "amandamedeiros",
-      nome: "Amanda Medeiros",
-      especialidade: "Psicóloga",
-      conselho: "CRP 11/18491",
-      foto: "especialistas/videre.png",
-      artigo: "a",
-    },
+    // {
+    //   id: "amandamedeiros",
+    //   nome: "Amanda Medeiros",
+    //   especialidade: "Psicóloga",
+    //   conselho: "CRP 11/18491",
+    //   foto: "especialistas/videre.webp",
+    //   artigo: "a",
+    // },
   ];
 
   return {

@@ -41,6 +41,13 @@ const cta = [
 export const loader = async () => {
   const especialistas = [
     {
+      id: "erivaldo",
+      nome: "Dr. Erivaldo Mororó",
+      especialidade: "Clínica Geral e Geriatria",
+      foto: "especialistas/erivaldo.webp",
+      artigo: "o",
+    },
+    {
       id: "roque",
       nome: "Dr. Roque Linhares",
       especialidade: "Clínico Geral",

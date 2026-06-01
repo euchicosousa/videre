@@ -1,9 +1,9 @@
 import { MapIcon } from "lucide-react";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
 import type { Route } from "./+types/home";
-import { motion } from "motion/react";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -65,13 +65,13 @@ export const loader = async () => {
     {
       id: "andyara",
       nome: "Dra. Andyara",
-      especialidade: "Ginecologista",
+      especialidade: "Ginecologista e Uroginecologista",
       conselho: "CREMEC 21112 / RQE 17006",
       foto: "especialistas/andyara.webp",
       artigo: "a",
     },
     {
-      id: "amanda",
+      id: "amandamontalverne",
       nome: "Dra. Amanda Mont’Alverne",
       especialidade: "Ultrassonografia",
       foto: "especialistas/amanda.webp",
@@ -92,14 +92,14 @@ export const loader = async () => {
       foto: "especialistas/beatriz.webp",
       artigo: "a",
     },
-    {
-      id: "talita",
-      nome: "Dra. Talita Ponte",
-      especialidade: "Clínica Geral",
-      conselho: "CRM-CE 27637",
-      foto: "especialistas/talita.webp",
-      artigo: "a",
-    },
+    // {
+    //   id: "talita",
+    //   nome: "Dra. Talita Ponte",
+    //   especialidade: "Clínica Geral",
+    //   conselho: "CRM-CE 27637",
+    //   foto: "especialistas/talita.webp",
+    //   artigo: "a",
+    // },
     {
       id: "carloseduardo",
       nome: "Carlos Eduardo",
@@ -137,14 +137,14 @@ export const loader = async () => {
       foto: "especialistas/videre.webp",
       artigo: "a",
     },
-    {
-      id: "deysebraga",
-      nome: "Deyse Braga",
-      especialidade: "Nutricionista",
-      conselho: "CRN 11-3486",
-      foto: "especialistas/deyse.webp",
-      artigo: "a",
-    },
+    // {
+    //   id: "deysebraga",
+    //   nome: "Deyse Braga",
+    //   especialidade: "Nutricionista",
+    //   conselho: "CRN 11-3486",
+    //   foto: "especialistas/deyse.webp",
+    //   artigo: "a",
+    // },
     {
       id: "andersonmota",
       nome: "Anderson Mota",
@@ -187,8 +187,8 @@ export const loader = async () => {
 export default function Home() {
   const { especialistas } = useLoaderData<typeof loader>();
   return (
-    <div className="bg-egeu-3 min-h-screen relative text-marmore-1">
-      <BACKGROUND />
+    <div className="bg-marmore-1 min-h-screen relative text-egeu-3">
+      {/* <BACKGROUND /> */}
 
       <div className="relative max-w-3xl mx-auto">
         <motion.div
@@ -347,7 +347,7 @@ export const VIDERE = () => {
 };
 
 export const BACKGROUND = () => {
-  const { cols, totalSquares } = useGrid(70);
+  const { cols, totalSquares } = useGrid(120);
 
   console.log(totalSquares);
 

@@ -71,6 +71,13 @@ export const loader = async () => {
       artigo: "a",
     },
     {
+      id: "amanda",
+      nome: "Dra. Amanda Mont’Alverne",
+      especialidade: "Ultrassonografia",
+      foto: "especialistas/amanda.webp",
+      artigo: "a",
+    },
+    {
       id: "mario",
       nome: "Dr. Mário Timbó",
       especialidade: "Dermatologista",
@@ -154,14 +161,14 @@ export const loader = async () => {
       foto: "especialistas/airton.webp",
       artigo: "o",
     },
-    // {
-    //   id: "amandamedeiros",
-    //   nome: "Amanda Medeiros",
-    //   especialidade: "Psicóloga",
-    //   conselho: "CRP 11/18491",
-    //   foto: "especialistas/videre.webp",
-    //   artigo: "a",
-    // },
+    {
+      id: "amandamedeiros",
+      nome: "Amanda Medeiros",
+      especialidade: "Psicóloga",
+      conselho: "CRP 11/18491",
+      foto: "especialistas/videre.webp",
+      artigo: "a",
+    },
   ];
 
   return {

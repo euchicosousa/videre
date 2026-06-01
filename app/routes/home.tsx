@@ -78,13 +78,6 @@ export const loader = async () => {
       artigo: "a",
     },
     {
-      id: "mario",
-      nome: "Dr. Mário Timbó",
-      especialidade: "Dermatologista",
-      foto: "especialistas/mario.webp",
-      artigo: "o",
-    },
-    {
       id: "beatriz",
       nome: "Dra. Ana Beatriz",
       especialidade: "Estética Clínica",

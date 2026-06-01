@@ -313,13 +313,13 @@ export default function Home() {
             especialistas
           </div>
         </motion.div> */}
-        <div className="flex flex-wrap justify-center p-8">
+        <div className="flex  flex-wrap justify-center">
           <AnimatePresence mode="popLayout">
             {filteredEspecialistas.map((especialista) => (
               <motion.div
                 layout
                 key={especialista.id}
-                className="w-[120px] md:w-[200px] shrink-0"
+                className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/7 shrink-0"
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{
                   opacity: 1,
@@ -338,25 +338,25 @@ export default function Home() {
                   to={`/whatsapp?text=${cta[especialista.seed]
                     .replace("__artigo__", especialista.artigo)
                     .replace("__especialista__", especialista.nome)}`}
-                  className="flex text-center flex-col gap-2 group p-4 hover:bg-egeu-3 transition-[background_color] duration-500 hover:text-marmore-1"
+                  className="flex text-center flex-col gap-2 group p-2 hover:bg-egeu-3 transition-[background_color] duration-500 hover:text-marmore-1"
                 >
                   <div className="relative overflow-hidden">
-                    {/* <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div> */}
+                    <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
                     <img
                       src={especialista.foto}
                       alt={especialista.nome}
-                      className="w-full relative overflow-hidden rounded-full bg-marmore-2"
+                      className="w-full relative"
                     />
                   </div>
 
-                  <div className="text-xl  leading-none font-medium tracking-tighter">
+                  <div className="text-xl line-clamp-2 leading-none font-medium tracking-tighter">
                     {especialista.nome}
                   </div>
-                  <div className="text-sm  leading-tight">
+                  <div className="text-sm line-clamp-1 leading-tight">
                     {especialista.especialidade}
                   </div>
                   {especialista.conselho && (
-                    <div className="uppercase  text-[10px] tracking-wider">
+                    <div className="uppercase  text-[10px] tracking-wider line-clamp-1">
                       {especialista.conselho}
                     </div>
                   )}

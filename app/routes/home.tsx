@@ -183,7 +183,7 @@ export default function Home() {
     <div className="bg-marmore-1 min-h-screen relative text-egeu-3">
       {/* <BACKGROUND /> */}
 
-      <div className="relative max-w-3xl mx-auto">
+      <div className="relative max-w-3xl md:max-w-full mx-auto">
         <motion.div
           className="p-8 w-96 mx-auto"
           initial={{ opacity: 0, y: "-50px" }}
@@ -209,7 +209,7 @@ export default function Home() {
             especialistas
           </div>
         </motion.div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] p-8 gap-4 ">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] p-8 gap-4 ">
           {especialistas.map((especialista, i) => (
             <motion.div
               className=""

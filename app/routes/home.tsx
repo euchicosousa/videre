@@ -211,7 +211,7 @@ export default function Home() {
             transition: { duration: 1, ease: "easeOut", delay: 1 },
           }}
         >
-          <div className="text-center leading-tight font-medium tracking-tighter text-xl border p-4">
+          <div className="text-center leading-tight font-medium tracking-tighter text-xl border-b p-4">
             Agende uma consulta ou procedimento <br /> com um dos nossos
             especialistas
           </div>

@@ -1,6 +1,6 @@
-import { MapIcon } from "lucide-react";
-import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { MapIcon, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState, useRef } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
 import type { Route } from "./+types/home";
@@ -32,10 +32,10 @@ const cta = [
   `Oi, podem me orientar sobre disponibilidade de agenda com __artigo__ __especialista__?`,
   `Olá, gostaria de marcar uma consulta com __artigo__ __especialista__. Qual o melhor caminho por aqui?`,
   `Oi, podem me ajudar a encontrar um bom horário para consultar com __artigo__ __especialista__?`,
-  "Olá, queria conversar sobre atendimento com __artigo__ __especialista__. Como funciona o agendamento?",
-  "Oi, estou em busca de uma consulta com __artigo__ __especialista__. Podem me guiar no processo?",
-  "Olá, gostaria de saber mais sobre como agendar com __artigo__ __especialista__. Me ajudam com os próximos passos?",
-  "Oi, podem me orientar com calma sobre a agenda d__artigo__ __especialista__? Quero agendar uma consulta.",
+  `Olá, queria conversar sobre atendimento com __artigo__ __especialista__. Como funciona o agendamento?`,
+  `Oi, estou em busca de uma consulta com __artigo__ __especialista__. Podem me guiar no processo?`,
+  `Olá, gostaria de saber mais sobre como agendar com __artigo__ __especialista__. Me ajudam com os próximos passos?`,
+  `Oi, podem me orientar com calma sobre a agenda d__artigo__ __especialista__? Quero agendar uma consulta.`,
 ];
 
 export const loader = async () => {
@@ -177,8 +177,51 @@ export const loader = async () => {
   };
 };
 
+const CATEGORIES = [
+  { id: "all", label: "Todos os especialistas" },
+  { id: "mulher", label: "Saúde da Mulher" },
+  { id: "estetica", label: "Estética e Sorriso" },
+  { id: "fisioterapia", label: "Fisioterapia e Reabilitação" },
+  { id: "psicologia", label: "Saúde Mental" },
+  { id: "clinica", label: "Cuidados Gerais" },
+] as const;
+
+const CATEGORY_MAP: Record<string, string[]> = {
+  mulher: ["iara", "andyara", "amandamontalverne"],
+  estetica: ["beatriz", "carloseduardo"],
+  fisioterapia: ["suelena", "saravasconcelos", "clararipardo", "celialinhares"],
+  psicologia: ["andersonmota", "joseairton", "amandamedeiros"],
+  clinica: ["erivaldo", "roque"],
+};
+
 export default function Home() {
   const { especialistas } = useLoaderData<typeof loader>();
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredEspecialistas = especialistas.filter((e) => {
+    if (selectedCategory === "all") return true;
+    return CATEGORY_MAP[selectedCategory]?.includes(e.id);
+  });
+
+  const activeCategoryLabel =
+    CATEGORIES.find((c) => c.id === selectedCategory)?.label ||
+    "Todos os especialistas";
+
   return (
     <div className="bg-marmore-1 min-h-screen relative text-egeu-3">
       {/* <BACKGROUND /> */}
@@ -195,7 +238,68 @@ export default function Home() {
         >
           <VIDERE />
         </motion.div>
+
         <motion.div
+          className="px-8 z-20 relative"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 1, ease: "easeOut", delay: 0.2 },
+          }}
+        >
+          <div className="flex flex-col items-center gap-4 text-center leading-tight font-medium tracking-tighter text-xl p-4">
+            <span className="text-egeu-3 opacity-90 text-lg">
+              O que você precisa hoje?
+            </span>
+
+            {/* Custom Premium Dropdown Selector */}
+            <div ref={dropdownRef} className="relative w-72 md:w-80">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-white/70 backdrop-blur-md border border-egeu-2/30 rounded-2xl shadow-sm text-base text-egeu-3 font-semibold hover:border-egeu-2/60 active:scale-[0.98] transition-all duration-200"
+              >
+                <span>{activeCategoryLabel}</span>
+                <motion.div
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ChevronDown className="w-5 h-5 text-egeu-2" />
+                </motion.div>
+              </button>
+
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 4, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute top-full left-0 right-0 bg-white/90 backdrop-blur-lg border border-egeu-2/20 rounded-2xl shadow-lg overflow-hidden z-30 py-1"
+                  >
+                    {CATEGORIES.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => {
+                          setSelectedCategory(category.id);
+                          setIsOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-150 flex items-center justify-between ${
+                          selectedCategory === category.id
+                            ? "bg-egeu-2 text-white font-semibold"
+                            : "text-egeu-3 hover:bg-egeu-2/10"
+                        }`}
+                      >
+                        {category.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+        {/* <motion.div
           className="px-8"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{
@@ -208,48 +312,58 @@ export default function Home() {
             Agende uma consulta ou procedimento <br /> com um dos nossos
             especialistas
           </div>
-        </motion.div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] p-8 gap-4 ">
-          {especialistas.map((especialista, i) => (
-            <motion.div
-              className=""
-              key={especialista.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { duration: 1, ease: "easeOut", delay: 0.2 * i },
-              }}
-            >
-              <Link
-                to={`/whatsapp?text=${cta[especialista.seed]
-                  .replace("__artigo__", especialista.artigo)
-                  .replace("__especialista__", especialista.nome)}`}
-                className="flex text-center flex-col gap-2 group"
+        </motion.div> */}
+        <div className="flex flex-wrap justify-center p-8">
+          <AnimatePresence mode="popLayout">
+            {filteredEspecialistas.map((especialista) => (
+              <motion.div
+                layout
+                key={especialista.id}
+                className="w-[120px] md:w-[200px] shrink-0"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                  transition: { duration: 0.4, ease: "easeOut" },
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.9,
+                  y: -50,
+                  transition: { duration: 0.25, ease: "easeIn" },
+                }}
               >
-                <div className="rounded-br-3xl relative overflow-hidden">
-                  <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
-                  <img
-                    src={especialista.foto}
-                    alt={especialista.nome}
-                    className="w-full relative"
-                  />
-                </div>
-
-                <div className="text-xl leading-none font-medium tracking-tighter">
-                  {especialista.nome}
-                </div>
-                <div className="text-sm leading-tight">
-                  {especialista.especialidade}
-                </div>
-                {especialista.conselho && (
-                  <div className="uppercase text-[10px] tracking-wider">
-                    {especialista.conselho}
+                <Link
+                  to={`/whatsapp?text=${cta[especialista.seed]
+                    .replace("__artigo__", especialista.artigo)
+                    .replace("__especialista__", especialista.nome)}`}
+                  className="flex text-center flex-col gap-2 group p-4 hover:bg-egeu-3 transition-[background_color] duration-500 hover:text-marmore-1"
+                >
+                  <div className="relative overflow-hidden">
+                    {/* <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div> */}
+                    <img
+                      src={especialista.foto}
+                      alt={especialista.nome}
+                      className="w-full relative overflow-hidden rounded-full bg-marmore-2"
+                    />
                   </div>
-                )}
-              </Link>
-            </motion.div>
-          ))}
+
+                  <div className="text-xl  leading-none font-medium tracking-tighter">
+                    {especialista.nome}
+                  </div>
+                  <div className="text-sm  leading-tight">
+                    {especialista.especialidade}
+                  </div>
+                  {especialista.conselho && (
+                    <div className="uppercase  text-[10px] tracking-wider">
+                      {especialista.conselho}
+                    </div>
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         <div className="px-8 flex gap-2 flex-col">

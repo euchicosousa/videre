@@ -120,7 +120,7 @@ export const loader = async () => {
       nome: "Clara Ripardo",
       especialidade: "Fisioterapeuta",
       conselho: "CREFITO 298410-F",
-      foto: "especialistas/videre.webp",
+      foto: "especialistas/clara.webp",
       artigo: "a",
     },
     {

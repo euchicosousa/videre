@@ -20,7 +20,7 @@ export function meta({}: Route.MetaArgs) {
         "Fisioterapeuta, Acupunturista, Psicóloga, Psicólogo, ginecologia, consulta ginecológica, prevenção feminina, saúde da mulher, " +
         "dermatologia, cuidados com a pele, estética facial, estética corporal, odontologia, implantes dentários, saúde bucal, " +
         "fisioterapia, acupuntura, reabilitação, dor, psicologia, saúde emocional, terapia, bem-estar, autocuidado, agendamento, " +
-        "consultas médicas Sobral, especialistas Sobral, clínica sobral centro, RQE, CRM, CREMEC, CREFITO, CRP",
+        "consultas médicas Sobral, especialistas Sobral, clínica sobral centro",
     },
   ];
 }
@@ -40,13 +40,13 @@ const cta = [
 
 export const loader = async () => {
   const especialistas = [
-    {
-      id: "erivaldo",
-      nome: "Dr. Erivaldo Mororó",
-      especialidade: "Clínica Geral e Geriatria",
-      foto: "especialistas/erivaldo.webp",
-      artigo: "o",
-    },
+    // {
+    //   id: "erivaldo",
+    //   nome: "Dr. Erivaldo Mororó",
+    //   especialidade: "Clínica Geral e Geriatria",
+    //   foto: "especialistas/erivaldo.webp",
+    //   artigo: "o",
+    // },
     {
       id: "roque",
       nome: "Dr. Roque Linhares",

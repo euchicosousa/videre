@@ -191,7 +191,7 @@ const CATEGORY_MAP: Record<string, string[]> = {
   estetica: ["beatriz", "carloseduardo"],
   fisioterapia: ["suelena", "saravasconcelos", "clararipardo", "celialinhares"],
   psicologia: ["andersonmota", "joseairton", "amandamedeiros"],
-  clinica: ["erivaldo", "roque"],
+  clinica: ["roque"],
 };
 
 export default function Home() {

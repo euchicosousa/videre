@@ -313,7 +313,7 @@ export default function Home() {
             especialistas
           </div>
         </motion.div> */}
-        <div className="flex  flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center lg:px-8">
           <AnimatePresence mode="popLayout">
             {filteredEspecialistas.map((especialista) => (
               <motion.div
@@ -341,11 +341,11 @@ export default function Home() {
                   className="flex text-center flex-col gap-2 group p-2 hover:bg-egeu-3 transition-[background_color] duration-500 hover:text-marmore-1"
                 >
                   <div className="relative overflow-hidden">
-                    <div className="absolute top-1/3 left-0 w-full h-full bg-egeu-2 rounded-tl-3xl group-hover:-translate-y-4 transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
+                    <div className="absolute left-0 bottom-0 w-full h-2/3 bg-egeu-2 rounded-tl-[45px] rounded-br-[45px]  transition-[transform_color] duration-500 group-hover:bg-egeu-1/50"></div>
                     <img
                       src={especialista.foto}
                       alt={especialista.nome}
-                      className="w-full relative"
+                      className="w-full relative rounded-br-[45px]"
                     />
                   </div>
 

@@ -159,7 +159,7 @@ export const loader = async () => {
       nome: "Amanda Medeiros",
       especialidade: "Psicóloga",
       conselho: "CRP 11/18491",
-      foto: "especialistas/videre.webp",
+      foto: "especialistas/amandamedeiros.webp",
       artigo: "a",
     },
   ];

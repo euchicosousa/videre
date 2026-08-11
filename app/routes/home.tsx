@@ -70,13 +70,13 @@ export const loader = async () => {
       foto: "especialistas/andyara.webp",
       artigo: "a",
     },
-    {
-      id: "amandamontalverne",
-      nome: "Dra. Amanda Mont’Alverne",
-      especialidade: "Ultrassonografia",
-      foto: "especialistas/amanda.webp",
-      artigo: "a",
-    },
+    // {
+    //   id: "amandamontalverne",
+    //   nome: "Dra. Amanda Mont’Alverne",
+    //   especialidade: "Ultrassonografia",
+    //   foto: "especialistas/amanda.webp",
+    //   artigo: "a",
+    // },
     {
       id: "beatriz",
       nome: "Dra. Ana Beatriz",
@@ -187,7 +187,7 @@ const CATEGORIES = [
 ] as const;
 
 const CATEGORY_MAP: Record<string, string[]> = {
-  mulher: ["iara", "andyara", "amandamontalverne"],
+  mulher: ["iara", "andyara"],
   estetica: ["beatriz", "carloseduardo"],
   fisioterapia: ["suelena", "saravasconcelos", "clararipardo", "celialinhares"],
   psicologia: ["andersonmota", "joseairton", "amandamedeiros"],

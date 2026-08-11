@@ -319,7 +319,7 @@ export default function Home() {
               <motion.div
                 layout
                 key={especialista.id}
-                className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 2xl:w-1/7 shrink-0"
+                className="w-1/2 sm:w-1/3 lg:w-1/4 xl:w-1/6 shrink-0"
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{
                   opacity: 1,

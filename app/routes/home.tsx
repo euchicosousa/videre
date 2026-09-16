@@ -40,13 +40,14 @@ const cta = [
 
 export const loader = async () => {
   const especialistas = [
-    // {
-    //   id: "erivaldo",
-    //   nome: "Dr. Erivaldo Mororó",
-    //   especialidade: "Clínica Geral e Geriatria",
-    //   foto: "especialistas/erivaldo.webp",
-    //   artigo: "o",
-    // },
+    {
+      id: "margarida",
+      nome: "Dra. Margarida Carneiro",
+      especialidade: "Oftalmopediatria e Estrabismo",
+      foto: "especialistas/margarida.webp",
+      artigo: "a",
+      conselho: "CREMEC 21100",
+    },
     {
       id: "roque",
       nome: "Dr. Roque Linhares",
@@ -177,16 +178,24 @@ export const loader = async () => {
   };
 };
 
-const CATEGORIES = [
+interface Category {
+  id: string;
+  label: string;
+  novo?: boolean;
+}
+
+const CATEGORIES: readonly Category[] = [
   { id: "all", label: "Todos os especialistas" },
+  { id: "visao", label: "Saúde Visual", novo: true },
   { id: "mulher", label: "Saúde da Mulher" },
   { id: "estetica", label: "Estética e Sorriso" },
   { id: "fisioterapia", label: "Fisioterapia e Reabilitação" },
   { id: "psicologia", label: "Saúde Mental" },
   { id: "clinica", label: "Cuidados Gerais" },
-] as const;
+];
 
 const CATEGORY_MAP: Record<string, string[]> = {
+  visao: ["margarida"],
   mulher: ["iara", "andyara"],
   estetica: ["beatriz", "carloseduardo"],
   fisioterapia: ["suelena", "saravasconcelos", "clararipardo", "celialinhares"],
@@ -275,7 +284,7 @@ export default function Home() {
                     animate={{ opacity: 1, y: 4, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute top-full left-0 right-0 bg-white/90 backdrop-blur-lg border border-egeu-2/20 rounded-2xl shadow-lg overflow-hidden z-30 py-1"
+                    className="absolute top-full left-0 right-0 bg-white/90 backdrop-blur-lg ring-black/10 ring  rounded-2xl shadow-lg overflow-hidden z-30 py-4"
                   >
                     {CATEGORIES.map((category) => (
                       <button
@@ -284,13 +293,19 @@ export default function Home() {
                           setSelectedCategory(category.id);
                           setIsOpen(false);
                         }}
-                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-150 flex items-center justify-between ${
+                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors duration-150 flex items-center justify-between tracking-normal ${
                           selectedCategory === category.id
                             ? "bg-egeu-2 text-white font-semibold"
                             : "text-egeu-3 hover:bg-egeu-2/10"
                         }`}
                       >
-                        {category.label}
+                        <div>{category.label}</div>
+
+                        {category.novo && (
+                          <div className="bg-amber-400 text-amber-800 px-3 py-1 rounded-full text-xs animate-pulse">
+                            Novo
+                          </div>
+                        )}
                       </button>
                     ))}
                   </motion.div>

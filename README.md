@@ -1,6 +1,6 @@
 # VIDERE — link app
 
-Página de especialistas da clínica VIDERE (Sobral-CE), publicada em `videre.cnvt.link` pela Vercel. HTML, CSS e JS puros, sem build. Diretrizes em [CLAUDE.md](CLAUDE.md); rotas em [ROTAS.md](ROTAS.md).
+Página de especialistas da clínica VIDERE (Sobral-CE), publicada em `videresaude.cnvt.link` pela Vercel. HTML, CSS e JS puros, sem build. Diretrizes em [CLAUDE.md](CLAUDE.md); rotas em [ROTAS.md](ROTAS.md).
 
 ```
 public/index.html           a página (filtro, grade de especialistas, contato)

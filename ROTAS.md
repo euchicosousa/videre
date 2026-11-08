@@ -1,6 +1,6 @@
 # Registro de rotas
 
-Rotas curtas (`videre.cnvt.link/whatsapp`) são opcionais: valem quando o link também é divulgado fora da página (bio, QR code, impresso) ou muda com frequência.
+Rotas curtas (`videresaude.cnvt.link/whatsapp`) são opcionais: valem quando o link também é divulgado fora da página (bio, QR code, impresso) ou muda com frequência.
 
 - **Sem rastreamento**: redirect no `vercel.json`.
 - **Com rastreamento**: arquivo `public/<rota>.html`, copiado de `modelos/rota-rastreada.html`.

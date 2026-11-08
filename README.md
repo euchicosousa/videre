@@ -1,87 +1,27 @@
-# Welcome to React Router!
+# VIDERE — link app
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Página de especialistas da clínica VIDERE (Sobral-CE), publicada em `videre.cnvt.link` pela Vercel. HTML, CSS e JS puros, sem build. Diretrizes em [CLAUDE.md](CLAUDE.md); rotas em [ROTAS.md](ROTAS.md).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+```
+public/index.html           a página (filtro, grade de especialistas, contato)
+public/whatsapp.html        transição que abre o WhatsApp com a mensagem de ?text=
+public/logo.svg             logo
+public/imagens/especialistas/  fotos
+public/tracking.js          Google Analytics e Pixel da Meta (IDs vazios)
+```
 
-## Features
+## Tarefas comuns
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **Adicionar especialista:** em `index.html`, copie um `<li>` da grade, troque nome, especialidade, conselho, foto, `data-nome`, `data-artigo` (o/a), `data-categoria` e `data-track`. Foto quadrada em `public/imagens/especialistas/`.
+- **Remover:** apague o `<li>` (e a foto, se não for usar mais).
+- **Categorias:** edite os `<option>` do `<select id="categoria">`; o valor precisa bater com o `data-categoria` dos cards.
+- **Mensagens do WhatsApp:** lista `mensagens` no script do `index.html`.
+- **Número e frases:** `NUMERO` e `frases` no script do `whatsapp.html`.
 
-## Getting Started
-
-### Installation
-
-Install the dependencies:
+## Rodar localmente
 
 ```bash
-npm install
+python3 -m http.server 4321 -d public
 ```
 
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Deploy: Vercel, Root Directory = pasta da videre (o `vercel.json` já define `public`).

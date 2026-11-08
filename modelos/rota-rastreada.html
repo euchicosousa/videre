@@ -1,0 +1,47 @@
+<!--
+  MODELO DE ROTA COM RASTREAMENTO (esta pasta não é publicada)
+  Use quando um link precisa registrar a visita no Google Analytics / Pixel da Meta
+  antes de redirecionar (ex.: link divulgado em QR code, anúncio ou impresso).
+
+  Como usar (exemplo para /whatsapp):
+  1. Copie este arquivo para public/whatsapp.html  (o nome do arquivo vira a rota)
+  2. Troque DESTINO pela URL de destino (aparece 3 vezes)
+  3. Apague a rota /whatsapp do vercel.json (senão o redirect da Vercel tem prioridade)
+  4. Atualize o ROTAS.md
+
+  Link de WhatsApp com mensagem: https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20...
+  (o texto precisa estar codificado: espaço = %20, vírgula = %2C, "á" = %C3%A1).
+-->
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Redirecionando...</title>
+    <noscript><meta http-equiv="refresh" content="0;url=DESTINO" /></noscript>
+    <script src="/tracking.js"></script>
+    <script>redirecionar("DESTINO");</script>
+    <style>
+      /* Mesmas cores do :root do index.html, se quiser combinar. */
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-content: center;
+        gap: 0.75rem;
+        padding: 1rem;
+        text-align: center;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: #f6f4ef;
+        color: #1c1b19;
+      }
+      h1 { margin: 0; font-size: 1.25rem; }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <h1>Redirecionando...</h1>
+    <a href="DESTINO">Clique aqui se não for redirecionado.</a>
+  </body>
+</html>

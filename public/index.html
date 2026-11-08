@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===== EDITE AQUI: título, descrição e prévia ao compartilhar (Open Graph) ===== -->
+    <title>VIDERE - Excelência em Saúde</title>
+    <meta name="description" content="Clínica multiespecialidades em Sobral, Ceará. Agende com nossos especialistas pelo WhatsApp." />
+    <meta name="keywords" content="VIDERE, clínica, multiespecialidade, Sobral, Ceará, consultas, saúde, atendimento médico, clínica em Sobral, Clínico Geral, Ginecologista, Cirurgia Minimamente Invasiva, Estética Clínica, Dentista, Implantodontista, Fisioterapeuta, Acupunturista, Psicólogo, Psicóloga, Oftalmopediatria, saúde da mulher, odontologia, implantes dentários, fisioterapia, acupuntura, psicologia, agendamento, consultas médicas Sobral, especialistas Sobral" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="VIDERE - Excelência em Saúde" />
+    <meta property="og:description" content="Clínica multiespecialidades em Sobral, Ceará. Agende com nossos especialistas pelo WhatsApp." />
+    <!-- og:image precisa ser URL completa. FALTA a imagem 1200x630: salve em public/og.jpg. -->
+    <meta property="og:image" content="https://videre.cnvt.link/og.jpg" />
+    <meta name="theme-color" content="#e9e8e4" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+
+    <!-- Verificação do Google Search Console (opcional): tire do comentário e cole o código.
+    <meta name="google-site-verification" content="CODIGO_DO_SEARCH_CONSOLE" />
+    -->
+
+    <!-- Rastreamento (Google Analytics e Pixel da Meta): configure os IDs em /tracking.js -->
+    <script src="/tracking.js"></script>
+
+    <!-- ===== TEMA: claro ou escuro, sorteado a cada visita (roda antes da página aparecer, sem piscar).
+         Para fixar um tema, deixe só um na lista (ex.: ["claro"]). Para testar: /?tema=escuro ou /?tema=claro.
+         As cores de cada tema ficam no bloco :root do CSS. ===== -->
+    <script>
+      {
+        const TEMAS = ["claro", "escuro"];
+        const COR = { claro: "#e9e8e4", escuro: "#123b6a" }; // cor da barra do navegador (theme-color)
+        const pedido = new URLSearchParams(location.search).get("tema");
+        const tema = TEMAS.includes(pedido) ? pedido : TEMAS[Math.floor(Math.random() * TEMAS.length)];
+        document.documentElement.dataset.tema = tema;
+        document.querySelector('meta[name="theme-color"]').content = COR[tema];
+      }
+    </script>
+
+    <style>
+      /* ===================== EDITE AQUI: identidade do cliente ===================== */
+      :root {
+        /* Cores fixas da marca (não mudam com o tema) */
+        --azul-escuro: #123b6a;    /* égeu 3 */
+        --acento: #2b5a8f;         /* égeu 2: fundo das fotos */
+        --acento-claro: #ebf5f9;   /* égeu 1 */
+        --marmore: #e9e8e4;        /* mármore 1 */
+
+        /* Tema CLARO (padrão) */
+        --fundo: var(--marmore);   /* fundo da página */
+        --texto: var(--azul-escuro); /* texto e logo */
+        --foco: var(--acento);     /* contorno de foco do teclado */
+
+        --raio: 1rem;
+        --fonte: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --largura: 50rem;          /* largura máxima do conteúdo (800px) */
+      }
+      /* Tema ESCURO: tudo azul, texto claro. É escolhido no <head> (script "TEMAS") a cada visita. */
+      :root[data-tema="escuro"] {
+        --fundo: var(--azul-escuro);
+        --texto: var(--marmore);
+        --foco: var(--marmore);
+      }
+      /* ============================================================================ */
+
+      /* ===== Base ===== */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; }
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--fundo);
+        color: var(--texto);
+        font-family: var(--fonte);
+        line-height: 1.4;
+        -webkit-font-smoothing: antialiased;
+      }
+      img, svg { display: block; max-width: 100%; height: auto; }
+      a { color: inherit; text-decoration: none; }
+      ul { list-style: none; padding: 0; }
+      :focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; }
+
+      /* ===== Seções ===== */
+      .miolo { width: 100%; max-width: var(--largura); margin-inline: auto; }
+
+      /* ===== Topo ===== */
+      .topo { width: min(100%, 24rem); margin-inline: auto; padding: 2rem; }
+      .logo { width: 100%; }
+
+      /* ===== Filtro por categoria (select nativo) ===== */
+      .filtro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 2rem 2rem;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+      .filtro label { font-size: 1.125rem; opacity: 0.9; }
+      .filtro select {
+        appearance: none;
+        width: min(100%, 20rem);
+        padding: 0.75rem 2.5rem 0.75rem 1rem;
+        border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
+        border-radius: var(--raio);
+        background: rgb(255 255 255 / 0.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232b5a8f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.75rem center / 1.25rem;
+        color: var(--azul-escuro);  /* o select é sempre claro, nos dois temas */
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: normal;
+        cursor: pointer;
+        transition: border-color 0.2s;
+      }
+      .filtro select:hover { border-color: color-mix(in srgb, var(--acento) 60%, transparent); }
+
+      /* ===== Grade de especialistas: 2 por linha, só a foto, sem espaço entre elas ===== */
+      /* 2 colunas no celular, subindo conforme a largura da tela até 6. Ajuste os pontos (px) abaixo. */
+      .miolo-grade { max-width: 90rem; }
+      .grade { display: grid; grid-template-columns: repeat(2, 1fr); }
+      @media (min-width: 600px)  { .grade { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 840px)  { .grade { grid-template-columns: repeat(4, 1fr); } }
+      @media (min-width: 1050px) { .grade { grid-template-columns: repeat(5, 1fr); } }
+      @media (min-width: 1260px) { .grade { grid-template-columns: repeat(6, 1fr); } }
+      .grade li[hidden] { display: none; }
+
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        aspect-ratio: 540 / 480;
+        overflow: hidden;
+        container-type: inline-size;   /* os textos abaixo usam cqw: acompanham a largura do card */
+        background: #1c1c1c;           /* só aparece enquanto a foto carrega */
+        color: #fff;                   /* texto sobre a foto: sempre claro */
+      }
+      .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+      /* Degradê escuro (preto, não azul) de baixo até um pouco mais da metade da foto: 60% embaixo, 0% em cima.
+         Para escurecer ou clarear, mude o 0.6 (opacidade) e o 55% (até onde sobe). */
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgb(0 0 0 / 0.6) 0%, transparent 55%);
+      }
+      .info { position: relative; z-index: 1; padding: 6cqw; display: flex; flex-direction: column; gap: 0.25rem; }
+      .titulo { font-size: clamp(0.6875rem, 5cqw, 0.9375rem); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9; }
+      .nome { font-size: clamp(1.125rem, 11cqw, 2.25rem); font-weight: 500; line-height: 0.95; letter-spacing: -0.04em; }
+      .especialidade {
+        display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+        font-size: clamp(0.75rem, 6.2cqw, 1.0625rem); line-height: 1.15; opacity: 0.95;
+      }
+      .card:focus-visible { outline-offset: -6px; outline-color: #fff; }
+
+      /* ===== Contato e texto institucional ===== */
+      .contato { display: flex; flex-direction: column; gap: 0.5rem; padding: 2rem; }
+      .contato a, .contato .endereco { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; }
+      .contato a { font-weight: 700; }
+      .contato a:first-child { font-size: 1.25rem; }
+      .contato svg { flex: none; width: 1.5rem; height: 1.5rem; }
+      .endereco { align-items: flex-start; line-height: 1.2; }
+      .sobre { padding: 2rem; font-size: 0.875rem; }
+      .sobre h1 { font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; }
+      .sobre p + p { margin-top: 0.5rem; }
+
+      /* ===== Animação de entrada ===== */
+      /* Cada bloco da página sobe e aparece em sequência (0.1s de intervalo). */
+      .anim > * { animation: entrar 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+      .anim > :nth-child(2) { animation-delay: 0.1s; }
+      .anim > :nth-child(3) { animation-delay: 0.2s; }
+      .anim > :nth-child(4) { animation-delay: 0.3s; }
+      .anim > :nth-child(n + 5) { animation-delay: 0.4s; }
+      @keyframes entrar { from { opacity: 0; translate: 0 24px; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .anim > * { animation: none; }
+        .filtro select { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="anim">
+      <!-- ===== Topo: logo (o nome está no aria-label do SVG) + filtro. O logo usa a cor do texto do tema. ===== -->
+      <section>
+        <div class="miolo">
+          <header class="topo">
+            <svg class="logo" viewBox="0 0 4239 976" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" role="img" aria-label="VIDERE"><path d="M-1600.744-2162.998q.244 5.219.244 10.498c0 122.801-99.699 222.5-222.5 222.5s-222.5-99.699-222.5-222.5 99.699-222.5 222.5-222.5q5.279 0 10.498.244c-106.848 5.22-191.998 93.623-191.998 201.756 0 111.487 90.513 202 202 202 108.133 0 196.536-85.15 201.756-191.998" transform="translate(4482.61 5204.693)scale(2.19145)"/><path d="M-1766.078-1990.775A190 190 0 0 1-1798.5-1988c-104.312 0-189-84.688-189-189s84.688-189 189-189 189 84.688 189 189c0 12.316-1.181 24.359-3.435 36.021.523-5.374.79-10.822.79-16.332 0-92.194-74.85-167.044-167.044-167.044s-167.044 74.85-167.044 167.044 74.85 167.044 167.044 167.044a169 169 0 0 0 13.111-.508" fill="#5d99b7" transform="translate(4482.61 5204.693)scale(2.19145)"/><path d="M-1876.871-2276.067c25.808-20.34 58.372-32.481 93.75-32.481 83.692 0 151.638 67.947 151.638 151.638s-67.946 151.639-151.638 151.639c-33.818 0-65.065-11.095-90.297-29.839 19.325 10.348 41.402 16.218 64.839 16.218 75.973 0 137.653-61.68 137.653-137.653s-61.68-137.654-137.653-137.654c-24.845 0-48.161 6.597-68.292 18.132" transform="translate(4482.61 5204.693)scale(2.19145)"/><path d="M4566.958 999.013h3.621l-16.3 37.25h-5.341l-16.3-37.25h4.363c1.523 0 2.902.902 3.511 2.297l12.696 29.053z" fill-rule="nonzero" transform="translate(-69117.848 -15250.68)scale(15.49888)"/><path d="M4571.288 999.013h3.199a3.52 3.52 0 0 1 3.521 3.522v33.728h-6.72z" fill-rule="nonzero" transform="matrix(15.49888 0 0 -15.49888 -69052.105 16293.829)"/><path d="M4581.738 1002.531v-3.568h13.47c15.019 0 20.971 8.215 20.971 18.7 0 9.67-3.648 18.6-21.071 18.6l-6.75-.05h-6.72v-1.45l.095-30.832h3.198a3.51 3.51 0 0 1 3.512 3.523l-.085 25.188h4.8c8.273 0 16.3-3.679 16.3-14.979 0-9.179-6.371-15.079-16.2-15.079z" fill-rule="nonzero" transform="translate(-68986.361 -15250.68)scale(15.49888)"/><path d="M16244.554 285.902V181.125h133.32v19.336h-96.927v66.105h119.128v19.336zm36.393-112.627c-6.606 0-24.426-2.624-29.097-7.295a24.9 24.9 0 0 1-7.296-17.613V84.198h155.521v19.336h-119.128z" transform="translate(-43814.37 -8.09)scale(2.86228)"/><path d="M16244.554 285.902V181.125h133.32v19.336h-96.927v66.105h119.128v19.336zm36.393-112.627c-6.606 0-24.426-2.624-29.097-7.295a24.9 24.9 0 0 1-7.296-17.613V84.198h155.521v19.336h-119.128z" transform="translate(-42703.226 -8.09)scale(2.86228)"/><path d="M4649.738 1018.366v-19.353h20.041c9.785 0 10.55 8.317 10.55 9.65 0 1.2-.404 9.551-8.55 9.55l12.25 18.05h-7.671l-12.2-17.9zm3.199 1.45a3.52 3.52 0 0 1 3.521 3.522v12.925h-6.72v-16.447zm13.721-5.074c5.992 0 6.95-3.815 6.95-6.079 0-1.84-.534-6.079-6.95-6.079h-10.2v12.158z" transform="translate(-68854.874 -15250.68)scale(15.49888)"/></svg>
+          </header>
+
+          <!-- Filtro: select nativo. Para criar ou renomear uma categoria, edite os <option>
+               e o data-categoria dos cards (valor "all" mostra todos). -->
+          <div class="filtro">
+            <label for="categoria">O que você precisa hoje?</label>
+            <select id="categoria">
+              <option value="all">Todos os especialistas</option>
+              <option value="visao">Saúde Visual (novo)</option>
+              <option value="mulher">Saúde da Mulher</option>
+              <option value="estetica">Estética e Sorriso</option>
+              <option value="fisioterapia">Fisioterapia e Reabilitação</option>
+              <option value="psicologia">Saúde Mental</option>
+              <option value="clinica">Cuidados Gerais</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!--
+        ===== Especialistas =====
+        Cada <li> é um especialista: só a foto, com nome e especialidade sobre o degradê.
+        Para adicionar: copie um bloco inteiro e troque foto (public/imagens/especialistas/, 540x480),
+        título (Dr./Dra.), nome, especialidade, data-nome (nome completo, usado na mensagem do WhatsApp),
+        data-artigo (o / a), data-categoria e data-track. Para remover: apague o <li>.
+        O conselho (CRM, CRP...) não aparece na tela: fica no JSON-LD (dados para buscadores) no fim do <body>.
+        O clique abre /whatsapp com uma mensagem pronta sorteada (o texto vem do script abaixo).
+      -->
+      <section>
+        <div class="miolo miolo-grade">
+          <ul class="grade" id="grade">
+            <!-- Dra. Margarida Carneiro -->
+            <li data-categoria="visao">
+              <a class="card" href="/whatsapp" data-track="margarida" data-nome="Dra. Margarida Carneiro" data-artigo="a">
+                <img src="/imagens/especialistas/margarida.webp" alt="" width="540" height="480" />
+                <div class="info">
+                <div class="titulo">Dra.</div>
+                  <div class="nome">Margarida Carneiro</div>
+                  <div class="especialidade">Oftalmopediatria e Estrabismo</div>
+                </div>
+              </a>
+            </li>
+            <!-- Dr. Roque Linhares -->
+            <li data-categoria="clinica">
+              <a class="card" href="/whatsapp" data-track="roque" data-nome="Dr. Roque Linhares" data-artigo="o">
+                <img src="/imagens/especialistas/roque.webp" alt="" width="540" height="480" />
+                <div class="info">
+                <div class="titulo">Dr.</div>
+                  <div class="nome">Roque Linhares</div>
+                  <div class="especialidade">Clínico Geral</div>
+                </div>
+              </a>
+            </li>
+            <!-- Dra. Iara Tomaz -->
+            <li data-categoria="mulher">
+              <a class="card" href="/whatsapp" data-track="iara" data-nome="Dra. Iara Tomaz" data-artigo="a">
+                <img src="/imagens/especialistas/iara.webp" alt="" width="540" height="480" />
+                <div class="info">
+                <div class="titulo">Dra.</div>
+                  <div class="nome">Iara Tomaz</div>
+                  <div class="especialidade">Ginecologista e Cirurgia Minimamente Invasiva</div>
+                </div>
+              </a>
+            </li>
+            <!-- Dra. Andyara -->
+            <li data-categoria="mulher">
+              <a class="card" href="/whatsapp" data-track="andyara" data-nome="Dra. Andyara" data-artigo="a">
+                <img src="/imagens/especialistas/andyara.webp" alt="" width="540" height="480" />
+                <div class="info">
+                <div class="titulo">Dra.</div>
+                  <div class="nome">Andyara</div>
+                  <div class="especialidade">Ginecologista e Uroginecologista</div>
+                </div>
+              </a>
+            </li>
+            <!-- Dra. Ana Beatriz -->
+            <li data-categoria="estetica">
+              <a class="card" href="/whatsapp" data-track="beatriz" data-nome="Dra. Ana Beatriz" data-artigo="a">
+                <img src="/imagens/especialistas/beatriz.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                <div class="titulo">Dra.</div>
+                  <div class="nome">Ana Beatriz</div>
+                  <div class="especialidade">Estética Clínica</div>
+                </div>
+              </a>
+            </li>
+            <!-- Dr. Carlos Eduardo -->
+            <li data-categoria="estetica">
+              <a class="card" href="/whatsapp" data-track="carloseduardo" data-nome="Dr. Carlos Eduardo" data-artigo="o">
+                <img src="/imagens/especialistas/carloseduardo.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                <div class="titulo">Dr.</div>
+                  <div class="nome">Carlos Eduardo</div>
+                  <div class="especialidade">Dentista e Implantodontista</div>
+                </div>
+              </a>
+            </li>
+            <!-- Suelena Ponte -->
+            <li data-categoria="fisioterapia">
+              <a class="card" href="/whatsapp" data-track="suelena" data-nome="Suelena Ponte" data-artigo="a">
+                <img src="/imagens/especialistas/suelena.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">Suelena Ponte</div>
+                  <div class="especialidade">Fisioterapeuta e Acupunturista</div>
+                </div>
+              </a>
+            </li>
+            <!-- Sara Vasconcelos -->
+            <li data-categoria="fisioterapia">
+              <a class="card" href="/whatsapp" data-track="saravasconcelos" data-nome="Sara Vasconcelos" data-artigo="a">
+                <img src="/imagens/especialistas/sara.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">Sara Vasconcelos</div>
+                  <div class="especialidade">Fisioterapeuta</div>
+                </div>
+              </a>
+            </li>
+            <!-- Clara Ripardo -->
+            <li data-categoria="fisioterapia">
+              <a class="card" href="/whatsapp" data-track="clararipardo" data-nome="Clara Ripardo" data-artigo="a">
+                <img src="/imagens/especialistas/clara.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">Clara Ripardo</div>
+                  <div class="especialidade">Fisioterapeuta</div>
+                </div>
+              </a>
+            </li>
+            <!-- Célia Linhares -->
+            <li data-categoria="fisioterapia">
+              <a class="card" href="/whatsapp" data-track="celialinhares" data-nome="Célia Linhares" data-artigo="a">
+                <img src="/imagens/especialistas/celia.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">Célia Linhares</div>
+                  <div class="especialidade">Fisioterapeuta</div>
+                </div>
+              </a>
+            </li>
+            <!-- José Airton -->
+            <li data-categoria="psicologia">
+              <a class="card" href="/whatsapp" data-track="joseairton" data-nome="José Airton" data-artigo="o">
+                <img src="/imagens/especialistas/airton.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">José Airton</div>
+                  <div class="especialidade">Psicólogo</div>
+                </div>
+              </a>
+            </li>
+            <!-- Amanda Medeiros -->
+            <li data-categoria="psicologia">
+              <a class="card" href="/whatsapp" data-track="amandamedeiros" data-nome="Amanda Medeiros" data-artigo="a">
+                <img src="/imagens/especialistas/amandamedeiros.webp" alt="" width="540" height="480" loading="lazy" />
+                <div class="info">
+                  <div class="nome">Amanda Medeiros</div>
+                  <div class="especialidade">Psicóloga</div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== Contato ===== -->
+      <section>
+        <div class="miolo contato">
+          <a href="/whatsapp" data-track="whatsapp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.5Z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2.1-1-1 .9a5 5 0 0 1-2.7-2.7l.9-1-1-2.1Z" fill="currentColor" stroke-width="1"/></svg>
+            3613-4001
+          </a>
+          <a href="https://instagram.com/videresaude" target="_blank" rel="noopener" data-track="instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.25"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            @videresaude
+          </a>
+          <div class="endereco">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div>Rua Dr. Figueiredo Rodrigues, 573</div>
+              <div>Centro, Sobral - CE</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Texto institucional ===== -->
+      <section>
+        <div class="miolo sobre">
+          <h1>A VIDERE é uma clínica multiespecialidades em Sobral que escolheu cuidar de um jeito diferente.</h1>
+          <p>Nossas especialidades: Oftalmopediatria • Ginecologia e Cirurgia Minimamente Invasiva • Estética Clínica • Clínica Geral • Odontologia e Implantodontia • Fisioterapia e Acupuntura • Psicologia.</p>
+          <p>Na VIDERE, você não é apenas um caso clínico. Sua história e sua individualidade fazem parte do tratamento.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dados para buscadores (não aparece na tela): nomes, especialidades e conselhos de classe. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "VIDERE",
+  "telephone": "+55 88 3613-4001",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Dr. Figueiredo Rodrigues, 573",
+    "addressLocality": "Sobral",
+    "addressRegion": "CE",
+    "addressCountry": "BR"
+  },
+  "employee": [
+    {
+      "@type": "Person",
+      "name": "Dra. Margarida Carneiro",
+      "jobTitle": "Oftalmopediatria e Estrabismo",
+      "identifier": "CREMEC 21100"
+    },
+    {
+      "@type": "Person",
+      "name": "Dr. Roque Linhares",
+      "jobTitle": "Clínico Geral"
+    },
+    {
+      "@type": "Person",
+      "name": "Dra. Iara Tomaz",
+      "jobTitle": "Ginecologista e Cirurgia Minimamente Invasiva",
+      "identifier": "CREMEC 20975 / RQE 16148 - 18129"
+    },
+    {
+      "@type": "Person",
+      "name": "Dra. Andyara",
+      "jobTitle": "Ginecologista e Uroginecologista",
+      "identifier": "CREMEC 21112 / RQE 17006"
+    },
+    {
+      "@type": "Person",
+      "name": "Dra. Ana Beatriz",
+      "jobTitle": "Estética Clínica",
+      "identifier": "CRM-CE 24490"
+    },
+    {
+      "@type": "Person",
+      "name": "Dr. Carlos Eduardo",
+      "jobTitle": "Dentista e Implantodontista"
+    },
+    {
+      "@type": "Person",
+      "name": "Suelena Ponte",
+      "jobTitle": "Fisioterapeuta e Acupunturista",
+      "identifier": "CREFITO 212484-F"
+    },
+    {
+      "@type": "Person",
+      "name": "Sara Vasconcelos",
+      "jobTitle": "Fisioterapeuta"
+    },
+    {
+      "@type": "Person",
+      "name": "Clara Ripardo",
+      "jobTitle": "Fisioterapeuta",
+      "identifier": "CREFITO 298410-F"
+    },
+    {
+      "@type": "Person",
+      "name": "Célia Linhares",
+      "jobTitle": "Fisioterapeuta"
+    },
+    {
+      "@type": "Person",
+      "name": "José Airton",
+      "jobTitle": "Psicólogo",
+      "identifier": "CRP 11/10803"
+    },
+    {
+      "@type": "Person",
+      "name": "Amanda Medeiros",
+      "jobTitle": "Psicóloga",
+      "identifier": "CRP 11/18491"
+    }
+  ]
+}
+    </script>
+
+    <script>
+      // Filtro por categoria: esconde os cards de outras categorias (data-categoria).
+      const select = document.getElementById("categoria");
+      const cards = document.querySelectorAll("#grade li");
+      select.addEventListener("change", () => {
+        cards.forEach((li) => { li.hidden = select.value !== "all" && li.dataset.categoria !== select.value; });
+      });
+
+      // Mensagem do WhatsApp: sorteia uma entre as abaixo para cada especialista.
+      // __artigo__ vira "o" ou "a" e __especialista__ vira o nome (data-artigo e data-nome do card).
+      const mensagens = [
+        "Olá, gostaria de conversar sobre o atendimento com __artigo__ __especialista__. Podem me orientar nos próximos passos?",
+        "Oi, queria entender como funciona o agendamento com __artigo__ __especialista__. Podem me ajudar?",
+        "Olá, estou buscando atendimento com __artigo__ __especialista__. Me contam como iniciar o processo?",
+        "Oi, podem me orientar sobre disponibilidade de agenda com __artigo__ __especialista__?",
+        "Olá, gostaria de marcar uma consulta com __artigo__ __especialista__. Qual o melhor caminho por aqui?",
+        "Oi, podem me ajudar a encontrar um bom horário para consultar com __artigo__ __especialista__?",
+        "Olá, queria conversar sobre atendimento com __artigo__ __especialista__. Como funciona o agendamento?",
+        "Oi, estou em busca de uma consulta com __artigo__ __especialista__. Podem me guiar no processo?",
+        "Olá, gostaria de saber mais sobre como agendar com __artigo__ __especialista__. Me ajudam com os próximos passos?",
+        "Oi, podem me orientar com calma sobre a agenda d__artigo__ __especialista__? Quero agendar uma consulta.",
+      ];
+      document.querySelectorAll("a[data-nome]").forEach((a) => {
+        const texto = mensagens[Math.floor(Math.random() * mensagens.length)]
+          .replace("__artigo__", a.dataset.artigo)
+          .replace("__especialista__", a.dataset.nome);
+        a.href = "/whatsapp?text=" + encodeURIComponent(texto);
+      });
+    </script>
+  </body>
+</html>
